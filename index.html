@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            width: 50%;
+        }
+        #tableId{
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+    <p id="addTask"> <b><u> To-Do List </u></b> </p>
+<input type='text' id='inputTask'/>
+<input type='button' onclick='addText()' value='Add To List'/>
+  
+    <h2> DIGITAL CLOCK</h2>
+    <p id="clk"></p>
+
+ <div id="img">
+     
+</div>
+    
+
+    <script>
+        var repeat = '';
+        function imgRepeat(){
+            var count = 0;
+            setInterval(function(){
+                if(count <10){
+                    repeat += `<div>
+                        <img src="https://media.istockphoto.com/photos/row-of-books-on-a-shelf-multicolored-book-spines-stack-in-the-picture-id1222550815?b=1&k=20&m=1222550815&s=170667a&w=0&h=MTxBeBrrrYtdlpzhMpD1edwLYQf3OPgkNeDEgIzYJww=" width="200" height="200"/>
+                        <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60" width="200" height="200" />
+                        </div>`;
+                document.getElementById("img").innerHTML = repeat;
+                count++;
+                console.log(count)
+                }else{
+                    clearInterval(this);
+                }
+           
+            },5000);
+        }
+      
+        imgRepeat();
+        function digitalTime(){
+            var date = new Date();
+            var hour = date.getHours();
+            var min = date.getMinutes();
+            var sec = date.getSeconds();
+            timeAM_PM = 'AM';
+            if(hour > 12){
+                hour -= 12;
+                timeAM_PM = 'PM';
+            }
+            if(hour == 0){
+                timeAM_PM = 'AM';
+            }
+            document.getElementById('clk').innerHTML = hour + ':' + min + ':' + sec + ':' + timeAM_PM;
+            setInterval(digitalTime , 1000);
+        }
+        digitalTime();
+
+
+        function addText(){
+            var input = document.getElementById('inputTask').value;
+            var node=document.createElement("p");
+            var textnode=document.createTextNode(input);
+            node.appendChild(textnode);
+            document.getElementById('addTask').appendChild(node);
+            
+            var removeTask = document.createElement('input');
+            removeTask.setAttribute('type', 'button');
+            removeTask.setAttribute("value", "Remove");
+            removeTask.setAttribute("id", "removeButton");
+            removeTask.addEventListener('click', function(e) {
+                node.parentNode.removeChild(node);
+            }, false);
+            node.appendChild(removeTask);
+        }
+  
+      
+        
+    </script>
+
+</body>
+</html>
